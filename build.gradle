@@ -1,0 +1,59 @@
+group 'com.ontometrics'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.1.1'
+    ext.markdown_parser_version = '0.1.25'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M3'
+    }
+}
+
+apply plugin: 'org.junit.platform.gradle.plugin'
+apply plugin: 'kotlin'
+
+junitPlatform {
+    filters {
+        engines {
+            include 'spek'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'http://dl.bintray.com/jetbrains/markdown' }
+    maven { url "http://dl.bintray.com/jetbrains/spek" }
+}
+
+dependencies {
+    // logging
+    compile 'org.slf4j:slf4j-api:1.7.7'
+    compile 'ch.qos.logback:logback-classic:1.+'
+    compile 'io.github.microutils:kotlin-logging:1.4.4'
+
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    // Markdown
+    compile "org.jetbrains:markdown:$markdown_parser_version"
+    //compile 'net.dgardiner.markdown:markdown:1.1.0'
+
+    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+
+    // spek
+    testCompile('org.jetbrains.spek:spek-api:1.1.0'){
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    testRuntime ('org.jetbrains.spek:spek-junit-platform-engine:1.1.0'){
+        exclude group: 'org.junit.platform'
+        exclude group: 'org.jetbrains.kotlin'
+    }
+
+
+}
