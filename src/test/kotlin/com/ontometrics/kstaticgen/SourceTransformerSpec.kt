@@ -29,10 +29,21 @@ object SourceTransformerSpec : Spek({
     val markdownFile = Paths.get("src/test/resources/markdown/kotlin-on-android.md").toFile()
 
     describe("given some markdown files in a dir"){
-        val dir = Paths.get("src/test/resources/markdown").toFile()
-        dir.walkTopDown().iterator().forEach { file ->
-            log.debug { "item: $file" }
-            assertNotNull(file)
+        on("walking the directory"){
+            it("will output a file for each template that was found"){
+                val dir = Paths.get("src/test/resources/markdown").toFile()
+                var generated = 0
+                dir.walkTopDown().iterator().forEach { file ->
+                    log.debug { "item: $file" }
+                    assertNotNull(file)
+                    if (file.isFile) {
+                        generated++
+                    }
+                }
+
+                assertEquals(generated, 1)
+
+            }
         }
         assertTrue(markdownFile.exists())
         on("starting a process"){
