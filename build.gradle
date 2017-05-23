@@ -2,7 +2,7 @@ group 'com.ontometrics'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.1.1'
+    ext.kotlin_version = '1.1.2-2'
     ext.markdown_parser_version = '0.1.25'
 
     repositories {
@@ -43,6 +43,9 @@ dependencies {
     // Markdown
     compile "org.jetbrains:markdown:$markdown_parser_version"
     //compile 'net.dgardiner.markdown:markdown:1.1.0'
+
+    // Templating
+    compile "org.antlr:ST4:4.0.8"
 
     testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
 

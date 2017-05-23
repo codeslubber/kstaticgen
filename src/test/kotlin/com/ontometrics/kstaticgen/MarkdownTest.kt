@@ -14,7 +14,7 @@ import kotlin.test.assertEquals
 /**
  *
  *
- * User: robwilliams
+ * User: Rob
  * Date: 4/27/17
  * Time: 10:51 PM
  *
@@ -31,7 +31,7 @@ object MarkdownSpec : Spek({
         val html = HtmlGenerator(src, parsedTree, flavour).generateHtml()
         on("attempting to generate HTML"){
             it("should output what we expect"){
-                assertEquals(html, "<body><p>Some <em>Markdown</em></p></body> ")
+                assertEquals(html, "<body><p>Some <em>Markdown</em></p></body>")
             }
         }
     }
