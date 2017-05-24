@@ -32,21 +32,24 @@ repositories {
 }
 
 dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     // logging
     compile 'org.slf4j:slf4j-api:1.7.7'
     compile 'ch.qos.logback:logback-classic:1.+'
     compile 'io.github.microutils:kotlin-logging:1.4.4'
-
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
-
     // Markdown
     compile "org.jetbrains:markdown:$markdown_parser_version"
-    //compile 'net.dgardiner.markdown:markdown:1.1.0'
+    // JSON/YAML
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.8.7'
+    compile 'com.fasterxml.jackson.module:jackson-module-kotlin:2.8.7'
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.8.7'
 
+    //compile 'net.dgardiner.markdown:markdown:1.1.0'
     // Templating
     compile "org.antlr:ST4:4.0.8"
 
+    // testing
     testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
 
     // spek
