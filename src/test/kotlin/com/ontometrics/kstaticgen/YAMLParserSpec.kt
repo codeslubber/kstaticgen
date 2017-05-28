@@ -11,7 +11,9 @@ import org.jetbrains.spek.api.dsl.on
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
 /**
  *
@@ -33,6 +35,11 @@ object YAMLParserSpec : Spek({
             it("should be possible to parse"){
                 log.debug { "YAML: $loaded" }
                 assertNotNull(loaded)
+
+                assertTrue(loaded is ConfigDto)
+
+                assertEquals(loaded.roundTime, 5)
+
             }
         }
 

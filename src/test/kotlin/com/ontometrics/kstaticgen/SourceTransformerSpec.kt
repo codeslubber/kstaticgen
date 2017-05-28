@@ -56,4 +56,31 @@ object SourceTransformerSpec : Spek({
             }
         }
     }
+
+    describe("write out the generated markdown"){
+        on("walking the directory"){
+            it("should make an HTML file for each"){
+                val dir = Paths.get("src/test/resources/markdown").toFile()
+                //val outputDir = Paths.get("src/test/resources/site")
+                var generated = 0
+                dir.walkTopDown().iterator().forEach { file ->
+                    log.debug { "item: $file" }
+                    assertNotNull(file)
+                    if (file.isFile) {
+                        generated++
+                        val src = markdownFile.readText()
+                        val flavour = CommonMarkFlavourDescriptor()
+                        val parsedTree = MarkdownParser(flavour).buildMarkdownTreeFromString(src)
+                        val html = HtmlGenerator(src, parsedTree, flavour).generateHtml()
+                        val outputFilename = ("src/test/resources/site" + "/" + file.name).replace(".md", ".html")
+                        val outputFile = Paths.get(outputFilename).toFile()
+                        outputFile.writeText(html)
+
+                        log.debug { "wrote file to: $outputFile" }
+                    }
+                }
+
+            }
+        }
+    }
 })
